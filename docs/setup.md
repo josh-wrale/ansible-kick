@@ -41,6 +41,23 @@ The `ansible-kick.conf` file must contain the following settings:
     hosts_template = "/etc/ansible-kick/hosts.tmpl"
     playbook_path = "/etc/ansible/playbooks"
 
+### Inventory Template
+
+ansible-kick uses Golang templates when generating temporary inventory files
+
+    [{{.Role}}]
+    {{.Host}}
+
+If the ip address of the ec2 instance is `203.0.113.10` and the role is nginx, the template will result in:
+
+     [nginx]
+     203.0.113.10
+
+Templates support any of the Ansible [inventory patterns](http://www.ansibleworks.com/docs/patterns.html)
+
+    [{{.Role}}]
+    {{.Host}} ansible_connection=ssh ansible_ssh_user=ec2-user
+
 ## Client
 
 Ansible kick was designed to be used during the initial ec2 instance boot process via a [userdata](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-waitcondition-article.html) script.
