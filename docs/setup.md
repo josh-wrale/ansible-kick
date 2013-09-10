@@ -35,6 +35,7 @@ The `ansible-kick.conf` file must contain the following settings:
     access_key_id = "AKIAIOSFODNN7EXAMPLE"
     secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
     region = "us-east-1"
+    role_key = "role"
 
     [ansible]
     command = "/usr/bin/ansible-playbook"

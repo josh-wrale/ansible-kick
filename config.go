@@ -13,6 +13,7 @@ type AWSConfig struct {
 	AccessKeyId     string `toml:"access_key_id"`
 	SecretAccessKey string `toml:"secret_access_key"`
 	Region          string `toml:"region"`
+	RoleKey         string `toml:"role_key"`
 }
 
 type AnsibleConfig struct {

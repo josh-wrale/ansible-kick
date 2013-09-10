@@ -42,7 +42,7 @@ func SetRole(host string) (role string, err error) {
 	} else {
 		tags := response.Reservations[0].Instances[0].Tags
 		for _, tag := range tags {
-			if tag.Key == "role" {
+			if tag.Key == config.AWS.RoleKey {
 				role = tag.Value
 			}
 		}
