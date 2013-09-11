@@ -27,7 +27,7 @@ type AnsibleConfig struct {
 func (c *Config) Load(fpath string) error {
 	// Set default values
 	c.AWS.RoleKey = "role"
-	c.Ansible.Cmd = "/usr/bin/ansible"
+	c.Ansible.Cmd = "/usr/bin/ansible-playbook"
 	c.Ansible.HostsTemplate = "/etc/ansible-kick/hosts.tmpl"
 	c.Ansible.PlaybookPath = "/etc/ansible/playbooks"
 
