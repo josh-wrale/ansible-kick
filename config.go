@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/BurntSushi/toml"
+	"log"
 )
 
 type Config struct {
@@ -22,7 +23,26 @@ type AnsibleConfig struct {
 	PlaybookPath  string `toml:"playbook_path"`
 }
 
-func DecodeFile(fpath string, v interface{}) error {
-	_, err := toml.DecodeFile(c, v)
+func (c *Config) Load(fpath string) error {
+	// Set default values
+	c.AWS.RoleKey = "role"
+	c.Ansible.Cmd = "/usr/bin/ansible"
+	c.Ansible.HostsTemplate = "/etc/ansible-kick/hosts.tmpl"
+	c.Ansible.PlaybookPath = "/etc/ansible/playbooks"
+
+	_, err := toml.DecodeFile(fpath, c)
+
+	if c.AWS.AccessKeyId == "" {
+		log.Fatal("missing AWS access_key_id")
+	}
+
+	if c.AWS.SecretAccessKey == "" {
+		log.Fatal("missing AWS secret_access_key")
+	}
+
+	if c.AWS.Region == "" {
+		log.Fatal("missing AWS region")
+	}
+
 	return err
 }

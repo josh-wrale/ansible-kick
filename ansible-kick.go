@@ -37,7 +37,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	err = DecodeFile(c, &config)
+	err = config.Load(c)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
