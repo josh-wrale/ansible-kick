@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/BurntSushi/toml"
 	"log"
+	"os/exec"
 )
 
 type Config struct {
@@ -42,6 +43,12 @@ func (c *Config) Load(fpath string) error {
 
 	if c.AWS.Region == "" {
 		log.Fatal("missing AWS region")
+	}
+
+	// is the ansible cmd executable?
+	_, err = exec.LookPath(c.Ansible.Cmd)
+	if err != nil {
+		log.Fatal(c.Ansible.Cmd + " is not executable")
 	}
 
 	return err
