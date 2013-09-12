@@ -33,7 +33,7 @@ func SetRole(host string) (role string, err error) {
 
 	response, err := e.Instances(nil, filter)
 	if err != nil {
-		return "", errors.New("EC2 API call failed; verify AWS credentials")
+		return "", errors.New("EC2 API call failed. Check your AWS credentials and system clock")
 	}
 
 	if len(response.Reservations) != 1 {
