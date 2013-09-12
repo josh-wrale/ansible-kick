@@ -2,6 +2,8 @@
 
 An alternative to [ansible-pull](http://www.ansibleworks.com/docs/playbooks2.html#pull-mode-playbooks) designed to make it easy for ec2 instances to request an Ansible push during initial boot; think auto-scaling.
 
+[![Build Status](https://travis-ci.org/kelseyhightower/ansible-kick.png)](https://travis-ci.org/kelseyhightower/ansible-kick)
+
 ## How it works
 
  * ec2 instance request an Ansible push via a remote SSH forced command during initial boot
