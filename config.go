@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/BurntSushi/toml"
 	"log"
+	"os"
 	"os/exec"
 )
 
@@ -43,6 +44,12 @@ func (c *Config) Load(fpath string) error {
 
 	if c.AWS.Region == "" {
 		log.Fatal("missing AWS region")
+	}
+
+	if _, err := os.Stat(c.Ansible.HostsTemplate); err != nil {
+		if os.IsNotExist(err) {
+			log.Fatal(c.Ansible.HostsTemplate + " inventory template file does not exist")
+		}
 	}
 
 	// is the ansible cmd executable?
