@@ -33,6 +33,9 @@ func (c *Config) Load(fpath string) error {
 	c.Ansible.PlaybookPath = "/etc/ansible/playbooks"
 
 	_, err := toml.DecodeFile(fpath, c)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 
 	if c.AWS.AccessKeyId == "" {
 		log.Fatal("missing AWS access_key_id")
