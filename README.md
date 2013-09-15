@@ -12,23 +12,23 @@ An alternative to [ansible-pull](http://www.ansibleworks.com/docs/playbooks2.htm
 ssh -i /tmp/ansible_kick -o RequestTTY=no -o StrictHostKeyChecking=no ansiblekick@203.0.113.100
 ```
 
- * ansible-kick queries the ec2 API filtering by `private_ip_address` obtained from the `SSH_CLIENT` environment variable
- * ansible-kick searches the instance tags for a key named "role"
- * ansible-kick generates a temporary Ansible inventory file:
+ * Search EC2 for a single instance with a public or private IP address matching the `SSH_CLIENT` environment variable
+ * If an EC2 instance is found assign a role based on the value of a instance tag, `role` by default
+ * Generate a temporary Ansible inventory file using a template:
 
 ```TOML
 [role]
 ec2instance
 ```
 
- * ansible-kick locates an Ansible playbook matching the role name (role.yml)
- * ansible-kick calls `ansible-playbook` using the temporary inventory file and matching playbook
+ * Locates an Ansible playbook matching the role name (/etc/ansible/playbooks/role.yml)
+ * Execute `ansible-playbook` using the temporary inventory file and matching playbook
 
 ```
 ansible-playbook -i /path/to/temp-inventory /path/to/role.yml
 ```
 
- * ansible-kick blocks until the `ansible-playbook` command exits
+ * Block until the `ansible-playbook` command exits
  * ec2 instance continues booting
 
 ## Install
