@@ -31,15 +31,12 @@ The default configuration file location is `/etc/ansible-kick/ansible-kick.conf`
 
 The `ansible-kick.conf` file must contain the following settings:
 
-    [aws]
-    access_key_id = "AKIAIOSFODNN7EXAMPLE"
-    secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+    aws_access_key_id = "AKIAIOSFODNN7EXAMPLE"
+    aws_secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
     region = "us-east-1"
     role_key = "role"
-
-    [ansible]
-    command = "/usr/bin/ansible-playbook"
-    hosts_template = "/etc/ansible-kick/hosts.tmpl"
+    ansible_command = "/usr/bin/ansible-playbook"
+    inventory_template = "/etc/ansible-kick/hosts.tmpl"
     playbook_path = "/etc/ansible/playbooks"
 
 ### Inventory Template
