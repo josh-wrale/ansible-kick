@@ -26,7 +26,7 @@ type ansibleConfig struct {
 // value, then setRole returns an error explaining why the role could not
 // be set.
 func (ac *ansibleConfig) setRole() error {
-	i, err := ac.findInstance()
+	i, err := ac.findEC2Instance()
 	if err != nil {
 		return err
 	}

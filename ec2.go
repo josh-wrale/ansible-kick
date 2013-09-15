@@ -24,7 +24,7 @@ func searchByFilter(e *ec2.EC2, key, value string) (*ec2.Instance, error) {
 	}
 }
 
-func (ac *ansibleConfig) findInstance() (*ec2.Instance, error) {
+func (ac *ansibleConfig) findEC2Instance() (*ec2.Instance, error) {
 	var (
 		err      error
 		instance *ec2.Instance
