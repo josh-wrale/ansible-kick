@@ -1,3 +1,6 @@
+// Copyright 2013 Kelsey Hightower. All rights reserved.
+// Use of this source code is governed by the Apache License, Version 2.0
+// that can be found in the LICENSE file.
 package main
 
 import (
@@ -25,6 +28,10 @@ func init() {
 		"config file")
 }
 
+// loadConfig sets default configuration values and loads additional settings
+// from an external configuration file, overriding defaults.
+// It returns a config object and an non-nil error if any of the required
+// settings are missing or invalid.
 func loadConfig() (*config, error) {
 	// Set default values
 	c := new(config)
