@@ -7,19 +7,7 @@ import (
 	"flag"
 	"log"
 	"os"
-	"strings"
 )
-
-// getHost returns a string representing the IP address extracted from the
-// SSH_CLIENT environment variable.
-func getHost() string {
-	host := os.Getenv("SSH_CLIENT")
-	host = strings.Split(host, " ")[0]
-	if host == "" {
-		log.Fatal("ipaddress required")
-	}
-	return host
-}
 
 func main() {
 	flag.Parse()
@@ -30,7 +18,10 @@ func main() {
 	// port of the client followed by the server's destination port number.
 	//
 	//  SSH_CLIENT = 203.0.113.10 4532 22
-	host := getHost()
+	host, err := extractIP(os.Getenv("SSH_CLIENT"))
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 
 	// Disable printing of the timestamp and hostname when logging to the
 	// console.
