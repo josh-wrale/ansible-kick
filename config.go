@@ -14,7 +14,7 @@ import (
 var configFile string
 
 type config struct {
-	AccessKeyId       string `toml:"aws_access_key_id"`
+	AccessKeyID       string `toml:"aws_access_key_id"`
 	SecretAccessKey   string `toml:"aws_secret_access_key"`
 	Region            string `toml:"region"`
 	RoleKey           string `toml:"role_key"`
@@ -44,7 +44,7 @@ func loadConfig() (*config, error) {
 	if err != nil {
 		return nil, err
 	}
-	if c.AccessKeyId == "" {
+	if c.AccessKeyID == "" {
 		return nil, errors.New("missing aws_access_key_id")
 	}
 	if c.SecretAccessKey == "" {

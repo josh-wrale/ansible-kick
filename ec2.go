@@ -19,9 +19,8 @@ func searchByFilter(e *ec2.EC2, key, value string) (*ec2.Instance, error) {
 	}
 	if len(resp.Reservations) != 1 {
 		return nil, errors.New("no instance with " + key + "=" + value)
-	} else {
-		return &resp.Reservations[0].Instances[0], nil
 	}
+	return &resp.Reservations[0].Instances[0], nil
 }
 
 func (ac *ansibleConfig) findEC2Instance() (*ec2.Instance, error) {
@@ -31,7 +30,7 @@ func (ac *ansibleConfig) findEC2Instance() (*ec2.Instance, error) {
 	)
 
 	auth := aws.Auth{
-		ac.settings.AccessKeyId,
+		ac.settings.AccessKeyID,
 		ac.settings.SecretAccessKey,
 	}
 	region := aws.Regions[ac.settings.Region]
@@ -41,10 +40,8 @@ func (ac *ansibleConfig) findEC2Instance() (*ec2.Instance, error) {
 	if err != nil {
 		instance, err = searchByFilter(e, "ip-address", ac.Host)
 	}
-
 	if err != nil {
 		return nil, err
-	} else {
-		return instance, nil
 	}
+	return instance, nil
 }

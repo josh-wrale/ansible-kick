@@ -48,9 +48,8 @@ func (ac *ansibleConfig) setPlaybookFilePath() error {
 	fn := path.Join(ac.settings.PlaybookPath, ac.Role+".yml")
 	if _, err := os.Stat(fn); os.IsNotExist(err) {
 		return errors.New("playbook does not exist " + fn)
-	} else {
-		ac.playbookFilePath = fn
 	}
+	ac.playbookFilePath = fn
 	return nil
 }
 
