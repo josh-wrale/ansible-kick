@@ -33,7 +33,7 @@ ansible-playbook -i /path/to/temp-inventory /path/to/role.yml
 
 ## Install
 
-    chmod +x /usr/local/bin/ansible-kick
+    go get github.com/kelseyhightower/ansible-kick
 
 ## Setup and Configuration
 
