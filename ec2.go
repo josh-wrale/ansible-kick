@@ -9,6 +9,12 @@ import (
 	"launchpad.net/goamz/ec2"
 )
 
+type EC2Config struct {
+	AccessKeyID     string
+	SecretAccessKey string
+	Region          string
+}
+
 func searchByFilter(e *ec2.EC2, key, value string) (*ec2.Instance, error) {
 	filter := ec2.NewFilter()
 	filter.Add(key, value)
@@ -23,25 +29,22 @@ func searchByFilter(e *ec2.EC2, key, value string) (*ec2.Instance, error) {
 	return &resp.Reservations[0].Instances[0], nil
 }
 
-func (ac *ansibleConfig) findEC2Instance() (*ec2.Instance, error) {
+func (c *EC2Config) findInstance(host string) (*ec2.Instance, error) {
 	var (
-		err      error
-		instance *ec2.Instance
+		err         error
+		ec2Instance *ec2.Instance
 	)
 
-	auth := aws.Auth{
-		ac.settings.AccessKeyID,
-		ac.settings.SecretAccessKey,
-	}
-	region := aws.Regions[ac.settings.Region]
+	auth := aws.Auth{c.AccessKeyID, c.SecretAccessKey}
+	region := aws.Regions[c.Region]
 	e := ec2.New(auth, region)
 
-	instance, err = searchByFilter(e, "private-ip-address", ac.Host)
+	ec2Instance, err = searchByFilter(e, "private-ip-address", host)
 	if err != nil {
-		instance, err = searchByFilter(e, "ip-address", ac.Host)
+		ec2Instance, err = searchByFilter(e, "ip-address", host)
 	}
 	if err != nil {
 		return nil, err
 	}
-	return instance, nil
+	return ec2Instance, nil
 }

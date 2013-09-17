@@ -14,13 +14,14 @@ import (
 var configFile string
 
 type config struct {
-	AccessKeyID       string `toml:"aws_access_key_id"`
-	SecretAccessKey   string `toml:"aws_secret_access_key"`
-	Region            string `toml:"region"`
-	RoleKey           string `toml:"role_key"`
-	AnsibleCmd        string `toml:"ansible_command"`
-	InventoryTemplate string `toml:"inventory_template"`
-	PlaybookPath      string `toml:"playbook_path"`
+	AccessKeyID       string   `toml:"aws_access_key_id"`
+	SecretAccessKey   string   `toml:"aws_secret_access_key"`
+	Region            string   `toml:"region"`
+	RoleKey           string   `toml:"role_key"`
+	AnsibleCmd        string   `toml:"ansible_command"`
+	InventoryTemplate string   `toml:"inventory_template"`
+	PlaybookPath      string   `toml:"playbook_path"`
+	ExtraVarTags      []string `toml:"extra_var_tags"`
 }
 
 func init() {
